@@ -11,6 +11,6 @@ foreach $word ($text =~ /(\w+)/g) {
     }
 }
 
-@ngrams = reverse sort({ $ngrams{$a} <=> $ngrams{$b} } keys %ngrams);
+@ngrams = sort({ $ngrams{$b} <=> $ngrams{$a} } keys %ngrams);
 
 print "@ngrams\n";
