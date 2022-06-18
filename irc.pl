@@ -3,21 +3,18 @@
 use strict;
 use IO::Socket;
 
-my $host = "irc.libera.chat";
-my $port = 6667;
-
 my $nick = "fagci_pl";
 
 my $s = IO::Socket::INET->new(
-    PeerAddr => $host,
-    PeerPort => $port,
+    PeerAddr => 'irc.libera.chat',
+    PeerPort => 6667,
 ) or die "E: connect: $!\n";
 
 my sub send {
-    print $s $_[0] . "\r\n";
+    print $s @_, "\r\n";
 }
 
-$SIG{INT} = sub {
+$SIG{INT} = $SIG{TERM} = sub {
     send 'QUIT';
     close $s;
     exit;
